@@ -7,6 +7,16 @@ const appDirectory = path.resolve(__dirname, '../');
 
 const babelConfig = require('../babel.config');
 
+const libAliases = {
+  'styled-components': require.resolve('styled-components'),
+};
+
+babelConfig.plugins[0][1].alias = {
+  'react-native$': require.resolve('react-native-web'),
+  ...babelConfig.plugins[0][1].alias,
+  ...libAliases,
+};
+
 // Babel loader configuration
 const babelLoaderConfiguration = {
   test: /\.(tsx|jsx|ts|js)?$/,
